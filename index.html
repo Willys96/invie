@@ -14,7 +14,7 @@
 		<header id="header" class="header contenedor"><!-- header -->
 
 			<figure class="logotipo"><!-- logotipo -->
-				<img src="images/invie.png" width="186" height="60" alt="Invie logotipo"/>
+				<img src="images/invie.png"srcset="images/invie.png 1x, images/invie-white.png 2x" width="186" height="60" alt="Invie logotipo"/>
 			</figure>
 			<span id="burger-button" class="burguer-button icon-menu"></span>
 			<nav class="menu" id="menu"><!-- menu -->
@@ -43,13 +43,17 @@
 	<section id="guitarras" class="guitarras contenedor"><!-- guitarras -->		
 		<h2>Nuestras guitarras</h2><!-- titulo -->
 		
-
-		<div class="video-responsive-contenedor">
-			<iframe class="video-responsive-src" width="560" height="315" src="https://www.youtube.com/embed/R1dW8M4EqYY" frameborder="0" allowfullscreen></iframe>
+		<div class="video-demo-contenedor">
+			<div class="video-demo">
+				<div class="video-responsive-contenedor">
+					<iframe class="video-responsive-src" width="560" height="315" src="https://www.youtube.com/embed/R1dW8M4EqYY" frameborder="0" allowfullscreen></iframe>
+				</div>
+			</div>
 		</div>
 
-		<video src="video/320x240.ogg"></video>
-		
+
+		<!-- <video src="video/320x240.ogg"></video> -->
+
 		<article  class="guitarra">
 			<img class="derecha" data-src="images/invie-acustica.png" alt="Guitarra Invie Acustica" width="290">
 			<div class="contenedor-guitarra-a">
@@ -106,9 +110,12 @@
 		</div>
 	</footer> 
 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/blazy/1.6.2/blazy.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/blazy/1.6.2/blazy.min.js">
+	</script>
 
-	<script >
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+
+	<script>
 
 	var consulta=window.matchMedia('(max-width: 480px)');
 
@@ -123,21 +130,33 @@
 
 			console.log('Se cumple la condición')
 
-			$burguerButton.addEventListener('touchstart',toggleMenu); 
+			$burguerButton.addEventListener('touchstart',changeMenu); 
 
 		}else{
 
 			console.log('No se cumple la condición')
 
-			$burguerButton.removeEventListener('touchstart',toggleMenu);
+			$burguerButton.removeEventListener('touchstart',changeMenu);
 
 		}
 
 	}
 
-	function toggleMenu () {
-		$menu.classList.toggle('active');
+	function changeMenu (lado) {
+		switch (lado) {
+			case 'left':
+			$menu.classList.remove('active');
+			break;
+			case 'right':
+			$menu.classList.add('active');
+			break;
+			default:
+			$menu.classList.toggle('active');
+			break;
+		}
 	}
+
+
 
 
 	mediaQuery();
@@ -147,6 +166,19 @@
 		selector:'img'
 	});
 	
+	var $body=document.body;
+
+	var gestos = new Hammer($body);
+
+	gestos.on('swipeleft', function(ev) {
+		console.log(ev);
+		changeMenu('left');
+	});
+
+	gestos.on('swiperight', function(ev) {
+		console.log(ev);
+		changeMenu('right');
+	});
 
 	</script>
 

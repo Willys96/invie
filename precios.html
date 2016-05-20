@@ -7,7 +7,7 @@
 	<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700|Allerta' rel='stylesheet' type='text/css'>
 	<meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
 </head>
-<body>
+<body class="precios">
 
 	<header id="header" class="header background"><!-- header -->
 
@@ -37,6 +37,9 @@
 					<th>Modelo</th>
 					<th>Precio</th>
 					<th>Descripción</th>
+					<th>Modelo</th>
+					<th>Precio</th>
+					<th>Descripción</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -44,13 +47,22 @@
 					<td>Invie Classic</td>
 					<td>$100000</td>
 					<td>Una guitarra muy Pro</td>
-				</tr>
-				<tr>
 					<td>Invie Classic</td>
 					<td>$100000</td>
 					<td>Una guitarra muy Pro</td>
 				</tr>
 				<tr>
+					<td>Invie Classic</td>
+					<td>$100000</td>
+					<td>Una guitarra muy Pro</td>
+					<td>Invie Classic</td>
+					<td>$100000</td>
+					<td>Una guitarra muy Pro</td>
+				</tr>
+				<tr>
+					<td>Invie Classic</td>
+					<td>$100000</td>
+					<td>Una guitarra muy Pro</td>
 					<td>Invie Classic</td>
 					<td>$100000</td>
 					<td>Una guitarra muy Pro</td>
@@ -92,6 +104,76 @@
 		</form>
 	</div>
 </footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/blazy/1.6.2/blazy.min.js">
+</script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+
+<script>
+
+var consulta=window.matchMedia('(max-width: 480px)');
+
+consulta.addListener(mediaQuery);
+
+var $burguerButton = document.getElementById('burger-button');
+var $menu= document.getElementById('menu');
+
+function mediaQuery () {
+
+	if(consulta.matches){
+
+		console.log('Se cumple la condición')
+
+		$burguerButton.addEventListener('touchstart',changeMenu); 
+
+	}else{
+
+		console.log('No se cumple la condición')
+
+		$burguerButton.removeEventListener('touchstart',changeMenu);
+
+	}
+
+}
+
+function changeMenu (lado) {
+	switch (lado) {
+		case 'left':
+		$menu.classList.remove('active');
+		break;
+		case 'right':
+		$menu.classList.add('active');
+		break;
+		default:
+		$menu.classList.toggle('active');
+		break;
+	}
+}
+
+
+
+
+mediaQuery();
+
+	// lazyloading=> se encarga de cargar las imagenes a medida que el scroll las descubre
+	var bLazy = new Blazy({
+		selector:'img'
+	});
+	
+	var $body=document.body;
+
+	var gestos = new Hammer($body);
+
+	gestos.on('swipeleft', function(ev) {
+		console.log(ev);
+		changeMenu('left');
+	});
+
+	gestos.on('swiperight', function(ev) {
+		console.log(ev);
+		changeMenu('right');
+	});
+
+	</script>
 </body>
 </html>

@@ -289,6 +289,25 @@ input:focus,textarea:focus{
 	z-index: 3;
 }
 
+video{
+	width:100%;
+}
+
+.video-responsive-contenedor{
+	position:relative;
+	padding-top: 56.25%;
+}
+
+.video-responsive-src{
+	position:absolute;
+	left: 0;
+	top: 0;
+	bottom:0;
+	right:0;
+	width:100%;
+	height: 100%;
+}
+
 @media screen and (max-width:800px) {
 
 	.titulo{
